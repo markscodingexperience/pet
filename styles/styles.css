@@ -1,0 +1,76 @@
+body{
+    /* font-family: "sans-serif"; */
+}
+.container .navbar a img{
+    width: 80px; 
+}
+    .container .navbar div button{
+        color: black;
+        margin-right: 29px;
+    }
+        .container .navbar div button:hover{
+            color: #fff;
+        }
+
+#section{
+    background-color: #FDCEB9;
+}
+.py-5 {
+    color: #655D8A;
+}
+
+#submenu{
+    box-shadow: 0 1px 3px rgba(3,0,71,.09) !important;
+}
+
+.row {
+    text-align: center;
+}
+
+.container-fluid .container .col-lg-4 .d-inline{
+    vertical-align: top;
+    display: inline-block !important;
+}
+.container-fluid .container .col-lg-4 .d-inline p{
+    vertical-align: top;
+}
+
+.container-fluid .container .col-lg-4 .d-inline span{
+    border-radius: 50% !important;
+    background-color: #ffeeda;
+    padding: 12px;
+    width: 3em;
+    vertical-align: top;
+}
+
+    .container-fluid .container .col-lg-4 .d-inline span i{
+        padding-left: 2px;
+    }
+
+small{
+    font-size: 0.8em;
+}
+
+    @media only screen and (max-width:420px) {
+        .container .navbar a img{
+            width: 50px; 
+        }
+    }
+    
+    @media only screen and (max-width:991px) {
+        ul.navbar-nav{
+            display: contents;
+        }
+        a.btn{
+            width: 100%;
+            padding: 10px 5px;
+            margin: 0 0 10px 0;
+        }
+    }
+    /* for span background */
+/* border-radius: 50% !important;
+background-color: antiquewhite;
+padding: 12px;
+width: 3em */
+/* icon 
+padding-left: 6px */
