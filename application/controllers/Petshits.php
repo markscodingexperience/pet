@@ -574,13 +574,14 @@ class Petshits extends CI_Controller {
     public function dashboard2(){
         $clinic['employee'] = $this->Pet->get_clinic_by_id_frontdesk_by_email($_SESSION['user']['email']);
         $clinic['clinic'] = $this->Pet->get_clinic_by_user_id($_SESSION['user']['id']);
+        $clinicid = $this->Pet->get_clinic_by_user_id2($_SESSION['user']['id']);
         $clinic['services'] = $this->Pet->get_all_services_via_clinic_id($clinic['employee']['clinic_id']);
         $clinic['products'] = $this->Pet->get_all_products_via_clinic_id($clinic['employee']['clinic_id']);
         $clinic['appointments'] = $this->Pet->get_appointments_for_frontdesk($clinic['employee']['clinic_id']);
-        $clinic['sales'] = $this->Pet->get_amount_paid_by_clinic_id($_SESSION['clinicid']);
-        $clinic['monthly'] = $this->Pet->get_monthly_sales($_SESSION['clinicid']);
-        $clinic['yearly'] = $this->Pet->get_yearly_sales($_SESSION['clinicid']);
-        $clinic['pie'] = $this->Pet->get_count_of_items($_SESSION['clinicid']);
+        $clinic['sales'] = $this->Pet->get_amount_paid_by_clinic_id($clinicid);
+        $clinic['monthly'] = $this->Pet->get_monthly_sales($clinicid);
+        $clinic['yearly'] = $this->Pet->get_yearly_sales($clinicid);
+        $clinic['pie'] = $this->Pet->get_count_of_items($clinicid);
         $this->load->view('pet/dashboard2', $clinic);
     }
 

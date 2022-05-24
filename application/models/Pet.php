@@ -18,6 +18,9 @@ class Pet extends CI_Model {
      function get_clinic_by_user_id($clinic_id){
         return $this->db->query("SELECT * FROM clinics WHERE user_id = ?", array($clinic_id))->row_array();
      }
+     function get_clinic_by_user_id2($clinic_id){
+        return $this->db->query("SELECT id FROM clinics WHERE user_id = ?", array($clinic_id))->row_array();
+     }
      function delete_bookmark($bookmark_id){
          return $this->db->delete("bookmarks", array('id' => $bookmark_id));
      }

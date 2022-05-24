@@ -399,6 +399,7 @@ class Pets extends CI_Controller {
 		$this->session->unset_userdata('user');
 		$this->session->unset_userdata('picture');
 		$this->session->unset_userdata('clinic');
+		// $this->session->sess_destroy();
 		redirect('/');
 	}
 
