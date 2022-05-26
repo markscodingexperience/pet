@@ -55,6 +55,7 @@ $route['login'] = 'users/login';
 $route['logout'] = 'users/logout';
 $route['pets/(:anything)'] = 'pets';
 $route['petshits/login_users'] = "pets/login_users";
+// $route['pets/location/(:num)&(:num)']['GET'] = "pets/location";
 // $route['confirmation']
 // $route['/clinic'] = 'show/clinic';
 

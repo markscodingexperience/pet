@@ -4,6 +4,10 @@ class Pet extends CI_Model {
      {
          return $this->db->query("SELECT * FROM clinics")->result_array();
      }
+     function get_all_clinics_by_city($city)
+     {
+         return $this->db->query("SELECT * FROM clinics WHERE city  LIKE '%$city%'")->result_array();
+     }
      function get_clinic_by_id($clinic_id)
      {
          return $this->db->query("SELECT * FROM clinics WHERE id = ?", array($clinic_id))->row_array();

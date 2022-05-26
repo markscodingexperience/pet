@@ -405,7 +405,13 @@ class Pets extends CI_Controller {
 
 	
 
-	// public function edit_clinic(){
-		
-	// }
+	public function terms(){
+		$this->load->view('pet/terms');
+	}
+
+	public function location(){
+		$this->load->model('Pet');
+		$data['data'] = $this->Pet->get_all_clinics_by_city($this->input->post('city'));
+		echo json_encode($data);
+	}
 }

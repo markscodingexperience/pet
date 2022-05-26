@@ -115,13 +115,17 @@
             </div>
             <div class="col-lg-9 py-5">
                 <h1 class="pb-3">Clinics you might want to check</h1>
+                <button class="btn btn-primary" id = "find-me">Update my location</button><br/>
+                <p id = "status"></p>
+                <a id = "map-link" target="_blank"></a>
+
                 <div class="row row-cols-6 row-cols-md-3 g-4">
                     <!-- FOREACH IS HERE FOR CLINICS DISPLAY -->
                     <?php foreach ($clinics as $key => $value) { ?>
-                        <div class="col px-0">
-                            <div class="card mb-3 pe-0 mx-0" style="max-width: 18rem;">
+                        <div class="col px-0" id="container">
+                            <div class="card mb-3 pe-0 mx-0" id="card<?= $value['id'] ?>" style="max-width: 18rem;">
                                 <a href="get/<?= $value['id']; ?>">
-                                    <div class="hover">
+                                    <div class="hover" id="hover">
                                         <?php 
                                             if ($value['image'] == '') { ?>
                                                 <img src="<?= base_url() ?>images/dog.jpg ?>" class="card-img-top img-fluid" alt="...">           
@@ -147,5 +151,95 @@
             </div>
         </div>
     </div>
+    <script>
+        function geoFindMe() {
+
+const status = document.querySelector('#status');
+const mapLink = document.querySelector('#map-link');
+
+mapLink.href = '';
+mapLink.textContent = '';
+
+function success(position) {
+  const latitude  = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  status.textContent = '';
+//   mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+  mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://us1.locationiq.com/v1/reverse.php?key=pk.833e1ba38dc446a34e12d6a1979598d0&lat="+ latitude +"&lon="+ longitude +"&format=json",
+  "method": "GET"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response['address']['city']);
+  jQuery.ajax({
+    type: "POST",
+    url: '<?= base_url().'pets/location' ?>',
+    dataType: 'json',
+    data: {city: response['address']['city']},
+
+    // success: function (obj, textstatus) {
+    //               if( !('error' in obj) ) {
+    //                   yourVariable = obj.result;
+    //               }
+    //               else {
+    //                   console.log(obj.error);
+    //               }
+    //         }
+    success: function(data){
+        console.log(data);
+        for (let index = 0; index < data.data.length; index++) {
+            var card = document.createElement("div");
+            card.className = "card";
+            var link = document.createElement("a");
+            var img = document.createElement("img");
+            <?php foreach ($clinics as $key => $value) { ?>
+                var div = document.getElementById("card<?= $value['id'] ?>");
+                link.href = "get/<?= $value['id'] ?>";
+                <?php  if ($value['image'] == '') { ?>
+                    img.src = "<?= base_url() ?>images/dog.jpg ?>";     
+                    img.className = "card-img-top img-fluid";
+                <?php    } else{ ?>
+                    img.src = "<?= base_url() ?>images/<?= $value['image'] ?>";
+                    img.className = "card-img-top img-fluid";
+                <?php } ?>
+                div.style.display = "none";
+                card.appendChild(link);
+                link.appendChild(hover);
+                hover = document.getElementById("hover");
+                hover.appendChild(img);
+                bendover = document.getElementById("container");
+                bendover.appendChild(card);
+                <?php } ?>
+            
+        }
+    }
+});
+
+});
+
+
+}
+
+function error() {
+  status.textContent = 'Unable to retrieve your location';
+}
+
+if(!navigator.geolocation) {
+  status.textContent = 'Geolocation is not supported by your browser';
+} else {
+  status.textContent = 'Locating…';
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+}
+
+document.querySelector('#find-me').addEventListener('click', geoFindMe);
+
+    </script>
 </body>
 </html>

@@ -307,7 +307,6 @@
                                     <p class="mt-2 mb-0"><?php if($value['year'] > 1){ echo $value['year']; ?> years <?php }else{ echo $value['year'];?> year <?php } ?><?php if($value['month'] > 1){ echo $value['month']; ?> months <?php }else{echo $value['month'];?> month <?php } ?></p></li>
                                     <li class="list-group-item"><?= $value['breed']; ?><small class="text-muted my-0"><p class="mb-0"><?= $value['gender']; ?>
                                         <?= $value['type']; ?></p></small></li>
-                                    <li class="list-group-item">Last visit to clinic:</li>
                                 </ul>
                                 <div class="card-body">
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal<?=$value['id']?>">Edit Details</button>

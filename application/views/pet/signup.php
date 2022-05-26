@@ -81,6 +81,7 @@
                             <input type="password" class="form-control" name="confirm">
                             <?php echo validation_errors(); ?>
                             <div class="row justify-content-center">
+                                <p>By clicking submit, you agree to our <a style="color:white;" href="<?= base_url() ?>pets/terms">terms and conditions and privacy policy </a> </p>
                                 <div class="col-lg-3">
                                     <input type="submit" class="btn btn-light my-5 px-5 rounded-pill" value="Register">
                                 </div>
